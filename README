@@ -1,0 +1,29 @@
+README
+Server code done by - KYUNGSEOK RYOO
+
+Project is a Echo Server which 3 functions
+1. Accepts messages from the client over TCP
+2. Echos back the received messages
+3. Handles multiple clients by forking
+
+Architecture
+-Server implementation
+    Implemented using C.
+    Uses TCP sockets to communicate with clients. 
+    Each client connection is handled separately using fork()
+    Server listens on an ipv4 binging to INADDR_ANY to accept connections. 
+    
+-Client-Server interaction
+    Client connects to the server and sends lines of text.
+    Server reads the lines and sends them back to the client. 
+
+Usage
+1. Compile the server
+    gcc -o MP1_server.c
+
+2. Running the Server
+    ./MP1_server <port>
+
+Requirements 
+- Linux Environment
+- GCC Compiler
