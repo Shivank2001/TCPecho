@@ -2,21 +2,29 @@
 init_server:server
 init_client:client
 
+SERVER_ADDR ?=127.0.0.1
+PORT?=8080
+
 client:client_v1.o
+	gcc client_v1.o -o client 
+
+server:ML1_server.o
+	gcc ML1_server.o -o server
+
+all: ML1_server.o client_v1.o
+	gcc ML1_server.o -o server
 	gcc client_v1.o -o client
 
-server:MP1_server.o
-	gcc MP1_server.o -o server
-
-output: MP1_server.o client_v1.o
-	gcc MP1_server.o -o server
-	gcc client_v1.o -o client
-
-MP1_server.o: MP1_server.c
-	gcc -c MP1_server.c
+ML1_server.o: ML1_server.c
+	gcc -c ML1_server.c
 
 client_v1.o: client_v1.c
 	gcc -c client_v1.c
 
 clean:
-	rm -f output MP1_server.o client_v1.o client server
+	rm -f all ML1_server.o client_v1.o client server
+
+echos:
+	@./server $(PORT)
+echo:
+	@./client $(SERVER_ADDR) $(PORT)
