@@ -1,5 +1,14 @@
 README
 Server code done by - KYUNGSEOK RYOO
+Client code done by Shivank Vishvanathan
+
+Compilation instructions:
+make all //builds the executables required to compile both the server and client
+make clean //cleans all the executable and binaries from the respective directory
+make echos //initializes the server on port 8080 by default.
+make echos PORT=[int port_number] //If server has to be initialized on port_number specified by user
+make echo //initializes client on port 8080 and IP address 127.0.0.1 by default
+make echo SERVER_ADDR=[IP_ADDR] PORT=[int port_number] //If client has to be initialized on IP address and port input by the user.
 
 Overview
 The project is a Echo Server with 3 functions
