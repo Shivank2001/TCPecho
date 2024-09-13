@@ -2,19 +2,12 @@ README
 Server code done by - KYUNGSEOK RYOO
 Client code done by Shivank Vishvanathan
 
-Compilation instructions:
-make all //builds the executables required to compile both the server and client
-make clean //cleans all the executable and binaries from the respective directory
-make echos //initializes the server on port 8080 by default.
-make echos PORT=[int port_number] //If server has to be initialized on port_number specified by user
-make echo //initializes client on port 8080 and IP address 127.0.0.1 by default
-make echo SERVER_ADDR=[IP_ADDR] PORT=[int port_number] //If client has to be initialized on IP address and port input by the user.
-
 Overview
 The project is a Echo Server with 3 functions
 1. Accepts messages from the client over TCP
 2. Echos back the received messages
 3. Handles multiple clients by forking
+4. Checks for errors in communication and handles them
 
 Architecture
 -Server implementation
@@ -36,6 +29,9 @@ Architecture
 -Client-Server interaction
     Client connects to the server and sends lines of text.
     Server reads the lines and sends them back to the client. 
+    No of bytes sent and received are printed on the client side,
+    while the process id of child and parent are printed on the 
+    server.
 
 Server process flow 
 +----------------------+
@@ -88,14 +84,26 @@ Client Process Flow
 +------------------------------+
 | Disconnect if error detected |
 +------------------------------+
-           
+
+Error Handling:
+We have tried to implement as many error handlers as possible
+-The error_sys function is used to print error messages depending on the error and exit with -1
+-The EINTR error is checked twice in the Writen() function, once for write to server and once for
+read from server.
+-Socket creation failure, connection failure and wrong command line inputs are also checked
+-Entering ctrl-D and disconnection of the server will all lead to EOF(End of File)
+error and exit with a -1.
+-Pressing the enter key without any text at the client will lead to EOF and client will exit.
+
 Usage
-1. Compile the server
-    gcc -o MP1_server.c
-
-2. Running the Server
-    ./MP1_server <port>
-
+Compilation instructions:
+1)make all //builds the executables required to compile both the server and client
+2)make clean //cleans all the executable and binaries from the respective directory
+3)make echos //initializes the server on port 8080 by default.
+4)make echos PORT=[int port_number] //If server has to be initialized on port_number specified by user
+5)make echo //initializes client on port 8080 and IP address 127.0.0.1 by default
+6)make echo SERVER_ADDR=[IP_ADDR] PORT=[int port_number] //If client has to be initialized on IP address and port input by the user.
 Requirements 
 - Linux Environment
 - GCC Compiler
+-Ensure all files are in the same directory to avoid complications/errors
