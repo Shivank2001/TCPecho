@@ -1,7 +1,8 @@
 README
 Server code done by - KYUNGSEOK RYOO
 
-Project is a Echo Server which 3 functions
+Overview
+The project is a Echo Server with 3 functions
 1. Accepts messages from the client over TCP
 2. Echos back the received messages
 3. Handles multiple clients by forking
@@ -16,6 +17,35 @@ Architecture
 -Client-Server interaction
     Client connects to the server and sends lines of text.
     Server reads the lines and sends them back to the client. 
+
+Server process flow 
++----------------------+
+|   Socket Creation    |
++----------------------+
+           |
++----------------------+
+|       Binding        |
++----------------------+
+           |
++----------------------+
+|      Listening       |
++----------------------+
+           |
++-------------------------------+
+|   Accepting Client Connection |
++-------------------------------+
+           |
++------------------------------+
+|   Forking Child Process      |
++------------------------------+
+           |
++-------------------------------+
+| Handling Client Communication |
++-------------------------------+
+           |
++----------------------+
+|    Closing Sockets   |
++----------------------+
 
 Usage
 1. Compile the server
