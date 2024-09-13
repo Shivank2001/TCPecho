@@ -13,6 +13,16 @@ Architecture
     Uses TCP sockets to communicate with clients. 
     Each client connection is handled separately using fork()
     Server listens on an ipv4 binging to INADDR_ANY to accept connections. 
+-Client Implementation
+    Implemented using C.
+    Makes use of standard socket libraries and standard c libraries
+    as well as string libraries. Input and output buffer are created to handlle
+    data being sent and written. Main function is used to create a socket and 
+    initialize and connect to server
+    Writen function is used for writing to the server as well as reading from server,
+    essentially combining the writen and readline functions into one. Errors are also
+    handled in this function
+    error_sys function is used to print an error message and exit with -1.
     
 -Client-Server interaction
     Client connects to the server and sends lines of text.
@@ -47,6 +57,29 @@ Server process flow
 |    Closing Sockets   |
 +----------------------+
 
+
+Client Process Flow
++----------------------+
+|   Socket Creation    |
++----------------------+
+           |
++----------------------+
+|       Connecting
+|       to Server
++----------------------+
+           |
++----------------------+
+|   Writing to server  |
++----------------------+
+           |
++-------------------------------+
+|   Reading echo from Server    |
++-------------------------------+
+           |
++------------------------------+
+| Disconnect if error detected |
++------------------------------+
+           
 Usage
 1. Compile the server
     gcc -o MP1_server.c
